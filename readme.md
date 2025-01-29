@@ -1,246 +1,91 @@
-
-# BOT-DISCORD 
-Paket ini adalah pembungkus kuat untuk Discord API v10, dirancang untuk memudahkan interaksi dengan fitur Discord termasuk manajemen pesan, operasi kanal, pengelolaan peran, dan lainnya.
-
-## Fitur
-
-- Penanganan menyeluruh untuk pesan, kanal, peran server, dan reaksi
-- Manajemen webhook dan emoji
-- Kontrol status pengguna dan pengiriman pesan langsung
-- Pengambilan log audit
-
-## Instalasi
-
-```bash
-npm install discord-simple-api
-```
-
-## Penggunaan
-
-Berikut cara menggunakan Discord-Simple-API:
-
-```javascript
-const Discord = require('discord-simple-api');
-const discordClient = new Discord('YOUR_DISCORD_BOT_TOKEN');
-```
-
-Untuk mendapatkan token Discord Anda, tempelkan kode berikut ke bilah URL browser saat Discord terbuka di web:
-
-```javascript
-javascript:var i = document.createElement('iframe');i.onload = function(){var localStorage = i.contentWindow.localStorage;prompt('Discord get token by Dante4rt', localStorage.getItem('token').replace(/["""+]/g, ''));};document.body.appendChild(i);
-```
-
-## Fungsi Fitur
-
-- **getUserInformation()**
-
-  Mendapatkan informasi pengguna yang diautentikasi dari token.
-
-  ```javascript
-  discordClient.getUserInformation().then(user => {
-      console.log(user);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **getMessagesInChannel()**
-
-  Mengambil pesan dari kanal tertentu.
-
-  ```javascript
-  discordClient.getMessagesInChannel('channelId', 10).then(messages => {
-      console.log(messages);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **sendMessageToChannel()**
-
-  Mengirim pesan ke kanal tertentu.
-
-  ```javascript
-  discordClient.sendMessageToChannel('channelId', 'Halo, Discord!').then(message => {
-      console.log('Pesan terkirim:', message);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **deleteMessageInChannel()**
-
-  Menghapus pesan tertentu dari kanal.
-
-  ```javascript
-  discordClient.deleteMessageInChannel('channelId', 'messageId').then(response => {
-      console.log('Pesan dihapus:', response);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **joinGuildByInvite()**
-
-  Bergabung dengan server menggunakan kode undangan.
-
-  ```javascript
-  discordClient.joinGuildByInvite('inviteCode').then(guild => {
-      console.log('Bergabung dengan server:', guild);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **leaveGuild()**
-
-  Keluar dari server tertentu.
-
-  ```javascript
-  discordClient.leaveGuild('guildId').then(response => {
-      console.log('Keluar dari server:', response);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **muteMemberInVoiceChannel()**
-
-  Membisukan anggota di kanal suara.
-
-  ```javascript
-  discordClient.muteMemberInVoiceChannel('guildId', 'memberId', true).then(response => {
-      console.log('Anggota dibisukan:', response);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **createChannel()**
-
-  Membuat kanal baru di server.
-
-  ```javascript
-  discordClient.createChannel('guildId', { name: 'new-channel', type: 0 }).then(channel => {
-      console.log('Kanal dibuat:', channel);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **updateChannel()**
-
-  Memperbarui informasi kanal tertentu.
-
-  ```javascript
-  discordClient.updateChannel('channelId', { name: 'updated-channel' }).then(channel => {
-      console.log('Kanal diperbarui:', channel);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **deleteChannel()**
-
-  Menghapus kanal tertentu.
-
-  ```javascript
-  discordClient.deleteChannel('channelId').then(response => {
-      console.log('Kanal dihapus:', response);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **addReaction()**
-
-  Menambahkan reaksi ke pesan.
-
-  ```javascript
-  discordClient.addReaction('channelId', 'messageId', '😀').then(response => {
-      console.log('Reaksi ditambahkan:', response);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **removeReaction()**
-
-  Menghapus reaksi dari pesan.
-
-  ```javascript
-  discordClient.removeReaction('channelId', 'messageId', '😀').then(response => {
-      console.log('Reaksi dihapus:', response);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **createWebhook()**
-
-  Membuat webhook di kanal.
-
-  ```javascript
-  discordClient.createWebhook('channelId', { name: 'new-webhook' }).then(webhook => {
-      console.log('Webhook dibuat:', webhook);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **deleteWebhook()**
-
-  Menghapus webhook tertentu.
-
-  ```javascript
-  discordClient.deleteWebhook('webhookId').then(response => {
-      console.log('Webhook dihapus:', response);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **listGuildEmojis()**
-
-  Menampilkan semua emoji dari server.
-
-  ```javascript
-  discordClient.listGuildEmojis('guildId').then(emojis => {
-      console.log('Emoji server:', emojis);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **sendDirectMessage()**
-
-  Mengirim pesan langsung ke pengguna.
-
-  ```javascript
-  discordClient.sendDirectMessage('userId', { content: 'Halo!' }).then(message => {
-      console.log('Pesan terkirim:', message);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-- **getAuditLogs()**
-
-  Mengambil log audit dari server.
-
-  ```javascript
-  discordClient.getAuditLogs('guildId').then(logs => {
-      console.log('Log audit:', logs);
-  }).catch(err => {
-      console.error(err);
-  });
-  ```
-
-## Kontribusi
-
-Kontribusi sangat disambut! Jika Anda tertarik untuk membantu, silakan baca pedoman kontribusi kami.
-
-## Lisensi
-
-Proyek ini dilisensikan di bawah **Lisensi ISC** - lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
-
+### REST Client API untuk Discord v10
+
+#### Mendapatkan Informasi Pengguna `http
+GET https://discord.com/api/v10/users/@me
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Mengambil Pesan dalam Channel `http
+GET https://discord.com/api/v10/channels/{channelId}/messages?limit={limit}
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Mengirim Pesan ke Channel ```http POST https://discord.com/api/v10/channels/{channelId}/messages Authorization: Bot YOUR_BOT_TOKEN Content-Type: application/json
+
+{
+"content": "Halo, Discord!"
+}
+#### Menghapus Pesan di Channel `http
+DELETE https://discord.com/api/v10/channels/{channelId}/messages/{messageId}
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Bergabung dengan Guild via Invite `http
+POST https://discord.com/api/v10/invites/{inviteCode}
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Keluar dari Guild `http
+DELETE https://discord.com/api/v10/users/@me/guilds/{guildId}
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Mendapatkan Peran di Guild `http
+GET https://discord.com/api/v10/guilds/{guildId}/roles
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Menambahkan Peran ke Anggota `http
+PUT https://discord.com/api/v10/guilds/{guildId}/members/{memberId}/roles/{roleId}
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Menghapus Peran dari Anggota `http
+DELETE https://discord.com/api/v10/guilds/{guildId}/members/{memberId}/roles/{roleId}
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Membuat Peran Baru di Guild ```http POST https://discord.com/api/v10/guilds/{guildId}/roles Authorization: Bot YOUR_BOT_TOKEN Content-Type: application/json
+
+{
+"name": "New Role", "permissions": "0", "color": 0
+}
+#### Memperbarui Peran di Guild ```http PATCH https://discord.com/api/v10/guilds/{guildId}/roles/{roleId} Authorization: Bot YOUR_BOT_TOKEN Content-Type: application/json
+
+{
+"name": "Updated Role"
+}
+#### Menghapus Peran di Guild `http
+DELETE https://discord.com/api/v10/guilds/{guildId}/roles/{roleId}
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Membisukan Anggota dalam Voice Channel ```http PATCH https://discord.com/api/v10/guilds/{guildId}/members/{memberId} Authorization: Bot YOUR_BOT_TOKEN Content-Type: application/json
+
+{
+"mute": true
+}
+#### Membuat Channel Baru di Guild ```http POST https://discord.com/api/v10/guilds/{guildId}/channels Authorization: Bot YOUR_BOT_TOKEN Content-Type: application/json
+
+{
+"name": "new-channel", "type": 0
+}
+#### Memperbarui Channel ```http PATCH https://discord.com/api/v10/channels/{channelId} Authorization: Bot YOUR_BOT_TOKEN Content-Type: application/json
+
+{
+"name": "updated-channel"
+}
+#### Menghapus Channel `http
+DELETE https://discord.com/api/v10/channels/{channelId}
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Menambahkan Reaksi ke Pesan `http
+PUT https://discord.com/api/v10/channels/{channelId}/messages/{messageId}/reactions/{emoji}/@me
+Authorization: Bot YOUR_BOT_TOKEN
+`
+
+#### Menghapus Reaksi dari Pesan `http
+DELETE https://discord.com/api/v10/channels/{channelId}/messages/{messageId}/reactions/{emoji}/@me
+Authorization: Bot YOUR_BOT_TOKEN
+`
